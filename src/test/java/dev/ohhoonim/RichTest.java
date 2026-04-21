@@ -11,8 +11,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.client.RestTestClient;
-import dev.ohhoonim.rich.application.PostDto;
-import dev.ohhoonim.rich.application.ReplyDto;
+import dev.ohhoonim.post.application.PostDto;
+import dev.ohhoonim.post.application.ReplyDto;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class RichTest {
