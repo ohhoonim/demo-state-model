@@ -9,6 +9,7 @@ import dev.ohhoonim.components.annotation.AggregateRoot;
 @AggregateRoot
 public class Post {
     private EntityId postId;
+    private PostStatus status;
     private String title;
     private String contents;
     private Audit audit;
@@ -32,6 +33,16 @@ public class Post {
 
     public static Post reconsitute(EntityId postId, String title, String contents, Audit audit) {
         return new Post(postId, title, contents, audit, null);
+    }
+
+    public void transition(PostTransitionEvent event, PostTransitionPolicy policy) {
+        var transitionResult = policy.transition(this.status, event);
+        this.setStatus(transitionResult.status());
+        transitionResult.actions().forEach(action -> action.followup(this));
+    }
+
+    public void setStatus(PostStatus status) {
+        this.status = status;
     }
 
     public void addReplies(List<Reply> replies) {
@@ -60,5 +71,9 @@ public class Post {
 
     public Audit audit() {
         return this.audit;
+    }
+
+    public PostStatus getStatus() {
+        return this.status;
     }
 }

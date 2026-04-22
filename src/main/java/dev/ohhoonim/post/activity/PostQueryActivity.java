@@ -1,7 +1,6 @@
 package dev.ohhoonim.post.activity;
 
 import java.util.List;
-import dev.ohhoonim.post.model.EntityId;
 import dev.ohhoonim.post.model.Post;
 import dev.ohhoonim.post.model.Reply;
 

@@ -2,8 +2,6 @@ package dev.ohhoonim.post.infra.adapter;
 
 import java.time.LocalDateTime;
 import dev.ohhoonim.components.annotation.Entity;
-import dev.ohhoonim.post.model.Post;
-import dev.ohhoonim.post.model.Reply;
 
 @Entity
 public class ReplyEntity  {
