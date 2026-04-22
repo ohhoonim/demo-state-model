@@ -2,7 +2,7 @@ package dev.ohhoonim.components.model.state;
 
 /*
 @startuml
-title State Model
+title State Transition Model
 
 note  as N1
     S: extends Status<S, T, C>
