@@ -1,15 +1,81 @@
 # State Transition Model
 
-## Model 구성요소
+## 1. 상태 전이란?
 
-- Status<S, T, C>
-- TransitionEvent<S, C>
-- PostAction<C>
-- TransitionResult<S, C>
-- StateTransitionPolicy<S, T, C>
+```mermaid
+stateDiagram-v2
+    Published: <상태>게시
+    Draft: <상태>초안
+    [*] --> Published : <전이>저장 이벤트
+    [*] --> Draft : <전이>임시저장 이벤트
+    Draft --> Published : <전이> 저장 이벤트
+    Draft --> Draft : <전이> 임시저장 이벤트
+    Published --> Draft : <전이> 임시저장 이벤트
+    
+```
+
+## 2. Model 구성요소
+
+- S: Status
+- T: Transition Event
+- C: Context (도메인 모델의 Aggregate Root)
+
+### 상태: Status<S, T, C>
+
+```java
+public interface Status <S, T, C> {
+    TransitionResult<S, C> trigger(T event);
+
+    default String toValue() {
+        return this.getClass().getSimpleName().toUpperCase();
+    }
+}
+```
+
+### 전이 이벤트: TransitionEvent<S, C>
+
+```java
+public interface TransitionEvent<S, C> {
+    List<PostAction<C>> actions();
+}
+
+```
+
+### 전이 후 실행해야할 것들:PostAction<C>
+
+```java
+@FunctionalInterface
+public interface PostAction<C> {
+   void followup(C context); 
+}
+
+```
+
+### 전이 후 결과: TransitionResult<S, C>
+
+```java
+public interface TransitionResult <S, C>{
+    
+    S status();
+
+    List<PostAction<C>> actions();
+}
+
+```
+
+### 상태모델이 사용할 Context, Status, TransitionEvent를 지정: StateTransitionPolicy<S, T, C>
+
+```java
+public interface StateTransitionPolicy<S extends Status<S, T, C>, T extends TransitionEvent<S, C>, C> {
+    public default TransitionResult<S, C> transition(S status, T transitionEvent) {
+        return status.trigger(transitionEvent);
+    }
+}
+
+```
 
 
-## 구현
+## 3. 구현
 
 - 각 모델 구성요소를 implements 한다.  
 

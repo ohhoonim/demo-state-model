@@ -15,7 +15,7 @@ interface StateTransitionPolicy<S, T, C> {
 }
 
 note top of StateTransitionPolicy
-transition 메서드 구현 
+AR에 transition 메서드 구현 
     return status.trigger(transitionEvent)
 end note
 
