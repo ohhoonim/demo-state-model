@@ -15,13 +15,13 @@ public class PostEntity implements ToModel<Post> {
     private String contents;
     private LocalDateTime createdAt; 
     private String createdBy;
-    private String modifiedAt;
-    private LocalDateTime modifedBy;
+    private LocalDateTime modifiedAt;
+    private String modifedBy;
 
     public PostEntity() {}
 
     public PostEntity(Long postId, String title, String contents, LocalDateTime createdAt,
-            String createdBy, String modifiedAt, LocalDateTime modifedBy) {
+            String createdBy, LocalDateTime modifiedAt, String modifedBy) {
         this.postId = postId;
         this.title = title;
         this.contents = contents;
@@ -80,19 +80,19 @@ public class PostEntity implements ToModel<Post> {
         this.createdBy = createdBy;
     }
 
-    public String getModifiedAt() {
+    public LocalDateTime getModifiedAt() {
         return modifiedAt;
     }
 
-    public void setModifiedAt(String modifiedAt) {
+    public void setModifiedAt(LocalDateTime modifiedAt) {
         this.modifiedAt = modifiedAt;
     }
 
-    public LocalDateTime getModifedBy() {
+    public String getModifedBy() {
         return modifedBy;
     }
 
-    public void setModifedBy(LocalDateTime modifedBy) {
+    public void setModifedBy(String modifedBy) {
         this.modifedBy = modifedBy;
     }
 
