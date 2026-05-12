@@ -4,9 +4,16 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 import dev.ohhoonim.post.activity.PostCommandActivity;
 import dev.ohhoonim.post.model.Post;
+import dev.ohhoonim.post.model.PostTransitionPolicy;
 
 @Component
 public class PostCommandActions implements PostCommandActivity {
+
+    private final PostTransitionPolicy policy;
+
+    public PostCommandActions(PostTransitionPolicy policy) {
+        this.policy = policy;
+    }
 
     @Override
     public Post registNewPost(Post post) {
